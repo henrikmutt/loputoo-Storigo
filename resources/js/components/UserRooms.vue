@@ -74,7 +74,7 @@ function deleteRoom(id: number) {
   <TableCell class="text-right">
     <DropdownMenu>
       <DropdownMenuTrigger as-child>
-        <Button variant="outline" size="sm">⋯</Button>
+        <Button variant="outline" size="sm"><Ellipsis /></Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem @click="editRoom(room.id)">
