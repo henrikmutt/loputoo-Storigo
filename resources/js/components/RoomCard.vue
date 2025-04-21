@@ -1,0 +1,46 @@
+<script setup lang="ts">
+import { Card, CardHeader, CardTitle, CardContent } from './ui/card'
+import Carousel from './ui/carousel/Carousel.vue'
+import CarouselContent from './ui/carousel/CarouselContent.vue'
+import CarouselItem from './ui/carousel/CarouselItem.vue'
+import CarouselPrevious from './ui/carousel/CarouselPrevious.vue'
+import CarouselNext from './ui/carousel/CarouselNext.vue'
+import CardDescription from './ui/card/CardDescription.vue'
+import { Badge } from './ui/badge'
+
+defineProps<{ room: any }>()
+</script>
+
+<template>
+
+  <Card>
+    <CardHeader class="p-0">
+      <Carousel class="relative w-full max-w-full overflow-hidden">
+        <Badge variant="secondary" class="absolute top-2 right-2 z-20">
+          4.7
+        </Badge>
+
+        <CarouselContent>
+          <CarouselItem v-for="(imageUrl, index) in room.images" :key="index" class="aspect-square">
+            <img
+              :src="imageUrl"
+              :alt="`Room image ${index + 1}`"
+              class="w-full h-full object-cover rounded-xl"
+            />
+          </CarouselItem>
+        </CarouselContent>
+
+        <CarouselPrevious @click.prevent class="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200 disabled:opacity-0" />
+        <CarouselNext @click.prevent class="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/80 backdrop-blur-sm rounded-full hover:bg-white shadow opacity-0 group-hover:opacity-100 transition-opacity duration-200 disabled:opacity-0" />
+      </Carousel>
+    </CardHeader>
+
+    <CardContent class="p-4">
+      <div class="flex justify-between items-center">
+        <CardTitle>{{ room.size }} m³</CardTitle>
+        <p><strong>{{ room.price_per_month }} €</strong> / Month</p>
+      </div>
+      <CardDescription>{{ room.location }}</CardDescription>
+    </CardContent>
+  </Card>
+</template>
