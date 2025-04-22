@@ -141,7 +141,7 @@ const rightNavItems: NavItem[] = [
                                 :href="auth.user ? '/rooms/create' : '/login?redirect=/rooms/create'"
                                 class="text-sm font-medium"
                             >
-                                Add Room
+                                 Add
                             </Link>
                         </Button>
 

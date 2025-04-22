@@ -12,20 +12,22 @@ const emit = defineEmits(['open-chat'])
 </script>
 
 <template>
-  <Tabs default-value="owner" class="w-full">
-    <TabsList class="w-full">
-      <TabsTrigger value="owner" class="flex justify-center w-full">
-        Your room bookings
-      </TabsTrigger>
-      <TabsTrigger value="renter" class="flex justify-center w-full">
-        Your booking requests
-      </TabsTrigger>
-    </TabsList>
-    <TabsContent value="owner">
-      <OwnerTable :bookings="ownerBookings" @open-chat="emit('open-chat', $event)" />
-    </TabsContent>
-    <TabsContent value="renter">
-      <RenterTable :bookings="renterBookings" @open-chat="emit('open-chat', $event)" />
-    </TabsContent>
-  </Tabs>
+  <div class="relative overflow-scroll rounded-xl border dark:bg-gray-900 shadow-md">
+    <Tabs default-value="owner" class="w-full">
+      <TabsList class="w-full">
+        <TabsTrigger value="owner" class="flex justify-center w-full">
+          Your room bookings
+        </TabsTrigger>
+        <TabsTrigger value="renter" class="flex justify-center w-full">
+          Your booking requests
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="owner">
+        <OwnerTable :bookings="ownerBookings" @open-chat="emit('open-chat', $event)" />
+      </TabsContent>
+      <TabsContent value="renter">
+        <RenterTable :bookings="renterBookings" @open-chat="emit('open-chat', $event)" />
+      </TabsContent>
+    </Tabs>
+  </div>
 </template>

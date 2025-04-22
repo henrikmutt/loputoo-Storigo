@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Room;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Http\RedirectResponse;
@@ -171,9 +172,19 @@ class BookingController extends Controller
             ->orderByDesc('created_at')
             ->get();
 
+        $totalEarnings = Payment::whereHas('booking.room', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->where('status', 'paid')->sum('amount');
+
+        $totalSpendings = Payment::whereHas('booking', function ($query) use ($userId) {
+            $query->where('renter_id', $userId);
+        })->where('status', 'paid')->sum('amount');
+
         return Inertia::render('Dashboard', [
             'ownerBookings' => $ownerBookings,
             'renterBookings' => $renterBookings,
+            'totalEarnings' => (float) $totalEarnings,
+            'totalSpendings' => (float) $totalSpendings,
             'rooms' => $rooms,
         ]);
     }

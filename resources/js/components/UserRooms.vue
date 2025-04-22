@@ -2,7 +2,8 @@
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '../components/ui/table'
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '../components/ui/dropdown-menu'
 import Button from '../components/ui/button/Button.vue'
-import { Ellipsis } from 'lucide-vue-next';
+import { Badge } from '../components/ui/badge'
+import { Check, Ellipsis, Pencil, Trash2, X } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3'
 
 const props = defineProps<{
@@ -66,9 +67,9 @@ function deleteRoom(id: number) {
     {{ room.price_per_month }} €/month
   </TableCell>
   <TableCell>
-  <span :class="room.is_available ? 'text-green-600' : 'text-red-600'">
+  <Badge :class="room.is_available ? 'bg-green-600' : 'bg-red-600'">
     {{ room.is_available ? 'Available' : 'Unavailable' }}
-  </span>
+  </Badge>
 </TableCell>
 
   <TableCell class="text-right">
@@ -78,22 +79,22 @@ function deleteRoom(id: number) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem @click="editRoom(room.id)">
-          Edit
+          <Pencil /> Edit
         </DropdownMenuItem>
         <DropdownMenuItem
           v-if="room.is_available"
           @click="makeUnavailable(room.id)"
         >
-          Make Unavailable
+          <X /> Unavailable
         </DropdownMenuItem>
         <DropdownMenuItem
           v-else
           @click="makeAvailable(room.id)"
         >
-          Make Available
+          <Check /> Available
         </DropdownMenuItem>
         <DropdownMenuItem class="text-red-600" @click="deleteRoom(room.id)">
-          Delete
+          <Trash2 /> Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

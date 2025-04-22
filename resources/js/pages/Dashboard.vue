@@ -10,10 +10,14 @@ import axios from 'axios'
 import Card from '@/components/ui/card/Card.vue';
 import CardTitle from '@/components/ui/card/CardHeader.vue';
 import CardContent from '@/components/ui/card/CardContent.vue';
+import TotalEarnings from '@/components/TotalEarnings.vue';
+import TotalSpendings from '@/components/TotalSpendings.vue'
 
 const props = defineProps<{
   ownerBookings: any[],
   renterBookings: any[],
+  totalEarnings: number,
+  totalSpendings: number,
   rooms: any[]
 }>()
 
@@ -57,22 +61,22 @@ function openChat(bookingId: number) {
     <Head title="Dashboard" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex flex-1 flex-col gap-8 rounded-xl p-4">
-            <div class="grid auto-rows-min gap-4">
-                <div class="relative overflow-scroll rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                    <DashTabs :owner-bookings="ownerBookings" :renter-bookings="renterBookings" @open-chat="openChat" />
-                </div>
-            </div>
-            <div class="flex flex-col lg:flex-row gap-4 relative">
-                <Card class="w-full lg:w-2/3 rounded-xl border border-sidebar-border/70 dark:border-sidebar-border">
-                  <CardTitle class="font-medium bg-muted">Your listings</CardTitle>
+        <div class="flex flex-1 flex-col gap-10 p-4">
+          <DashTabs :owner-bookings="ownerBookings" :renter-bookings="renterBookings" @open-chat="openChat" />
+            <div class="flex flex-col-reverse lg:flex-row gap-10 lg:gap-6">
+                <Card class="w-full lg:w-2/3 dark:border-sidebar-border border dark:bg-gray-900 shadow-md">
+                  <CardTitle class="font-medium bg-muted rounded-t-xl">Your listings</CardTitle>
                   <CardContent>
                     <UserRooms :rooms="rooms" />
                   </CardContent>
                 </Card>
-                <div class="flex flex-row lg:flex-col gap-4 w-1/3">
-                  <div class="h-1/2">Earnings</div>
-                  <div class="h-1/2">Spendings</div>
+                <div class="flex lg:w-1/3 flex-row lg:flex-col gap-4 h-full">
+                    <div class="flex flex-1">
+                      <TotalEarnings :total="totalEarnings" class="w-full" />
+                    </div>
+                    <div class="flex flex-1">
+                      <TotalSpendings :total="props.totalSpendings" class="w-full" />
+                    </div>
                 </div>
             </div>
         </div>

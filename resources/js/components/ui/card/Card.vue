@@ -11,7 +11,7 @@ const props = defineProps<{
   <div
     :class="
       cn(
-        'group',
+        'group rounded-xl',
         props.class,
       )
     "
