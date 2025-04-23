@@ -11,7 +11,8 @@ import Card from '@/components/ui/card/Card.vue';
 import CardTitle from '@/components/ui/card/CardHeader.vue';
 import CardContent from '@/components/ui/card/CardContent.vue';
 import TotalEarnings from '@/components/TotalEarnings.vue';
-import TotalSpendings from '@/components/TotalSpendings.vue'
+import TotalSpendings from '@/components/TotalSpendings.vue';
+import EditRoom from '@/components/EditRoom.vue'
 
 const props = defineProps<{
   ownerBookings: any[],
@@ -37,6 +38,9 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
+const selectedRoom = ref(null)
+const isEditDialogOpen = ref(false)
+
 function openChat(bookingId: number) {
   openChatBookingId.value = bookingId
 
@@ -54,7 +58,10 @@ function openChat(bookingId: number) {
     })
 }
 
-
+function openEditRoom(room: any) {
+  selectedRoom.value = room
+  isEditDialogOpen.value = true
+}
 </script>
 
 <template>
@@ -67,7 +74,7 @@ function openChat(bookingId: number) {
                 <Card class="w-full lg:w-2/3 dark:border-sidebar-border border dark:bg-gray-900 shadow-md">
                   <CardTitle class="font-medium bg-muted rounded-t-xl">Your listings</CardTitle>
                   <CardContent>
-                    <UserRooms :rooms="rooms" />
+                    <UserRooms :rooms="rooms" @edit-room="openEditRoom"/>
                   </CardContent>
                 </Card>
                 <div class="flex lg:w-1/3 flex-row lg:flex-col gap-4 h-full">
@@ -89,4 +96,11 @@ function openChat(bookingId: number) {
         :current-user-id="chatData.currentUserId"
         @close="chatData = null"
         @refresh="openChat(openChatBookingId!)"/>
+
+    <EditRoom
+        v-if="selectedRoom"
+        :open="isEditDialogOpen"
+        :room="selectedRoom"
+        @close="isEditDialogOpen = false"
+      />
 </template>

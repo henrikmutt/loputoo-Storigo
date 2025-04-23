@@ -78,7 +78,7 @@ function deleteRoom(id: number) {
         <Button variant="outline" size="sm"><Ellipsis /></Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem @click="editRoom(room.id)">
+        <DropdownMenuItem @click="$emit('edit-room', room)">
           <Pencil /> Edit
         </DropdownMenuItem>
         <DropdownMenuItem

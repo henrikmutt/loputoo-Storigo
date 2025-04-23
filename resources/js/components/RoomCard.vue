@@ -6,7 +6,6 @@ import CarouselItem from './ui/carousel/CarouselItem.vue'
 import CarouselPrevious from './ui/carousel/CarouselPrevious.vue'
 import CarouselNext from './ui/carousel/CarouselNext.vue'
 import CardDescription from './ui/card/CardDescription.vue'
-import { Badge } from './ui/badge'
 
 defineProps<{ room: any }>()
 </script>
@@ -16,10 +15,6 @@ defineProps<{ room: any }>()
   <Card>
     <CardHeader class="p-0">
       <Carousel class="relative w-full max-w-full overflow-hidden">
-        <Badge variant="secondary" class="absolute top-2 right-2 z-20">
-          4.7
-        </Badge>
-
         <CarouselContent>
           <CarouselItem v-for="(imageUrl, index) in room.images" :key="index" class="aspect-square">
             <img
