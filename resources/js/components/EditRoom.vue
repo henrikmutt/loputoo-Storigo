@@ -164,7 +164,7 @@ function submit() {
     </div>
 
       <DialogFooter class="mt-4">
-        <Button @click="submit" :disabled="form.processing">Save</Button>
+        <Button @click="submit" :disabled="form.processing" class="flex justify-center w-full">Save</Button>
       </DialogFooter>
     </DialogContent>
   </Dialog>

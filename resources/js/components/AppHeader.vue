@@ -18,8 +18,9 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
+import { BookOpen, Folder, HousePlus, LayoutGrid, Menu, Search } from 'lucide-vue-next';
 import { computed } from 'vue';
+
 
 interface Props {
   breadcrumbs?: BreadcrumbItem[];
@@ -49,18 +50,7 @@ const mainNavItems: NavItem[] = [
     },
 ];
 
-const rightNavItems: NavItem[] = [
-    {
-        title: 'Repository',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
-    },
-];
+
 </script>
 
 <template>
@@ -78,7 +68,7 @@ const rightNavItems: NavItem[] = [
                         <SheetContent side="left" class="w-[300px] p-6">
                             <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
                             <SheetHeader class="flex justify-start text-left">
-                                <AppLogoIcon class="size-6 fill-current text-black dark:text-white" />
+                                <AppLogoIcon />
                             </SheetHeader>
                             <div class="flex h-full flex-1 flex-col justify-between space-y-4 py-6">
                                 <nav class="-mx-3 space-y-1">
@@ -121,16 +111,28 @@ const rightNavItems: NavItem[] = [
                         <NavigationMenuList class="flex h-full items-stretch space-x-2">
                             <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" class="relative flex h-full items-center">
                                 <Link :href="item.href" class="relative">
-                                    <NavigationMenuLink
-                                    :class="[navigationMenuTriggerStyle(), activeItemStyles(item.href), 'h-9 cursor-pointer px-3']"
-                                    >
-                                    <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
-                                    {{ item.title }}
-                                    <span
-                                        v-if="item.href === '/dashboard' && props.hasWaitingActions"
-                                        class="absolute top-0 right-0 mt-1 ml-1 size-2 rounded-full bg-red-500"
-                                    ></span>
-                                    </NavigationMenuLink>
+
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                        <TooltipTrigger>
+                                            <NavigationMenuLink
+                                            :class="[navigationMenuTriggerStyle(), activeItemStyles(item.href), 'h-9 cursor-pointer px-3']"
+                                            >
+                                            <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
+                                            {{ item.title }}
+                                            <span
+                                                v-if="item.href === '/dashboard' && props.hasWaitingActions"
+                                                class="absolute top-0 right-0 mt-1 ml-1 size-2 rounded-full bg-red-500"
+                                            ></span>
+                                            </NavigationMenuLink>
+
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>Go to your dashboard</p>
+                                        </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+
                                 </Link>
                                 </NavigationMenuItem>
                         </NavigationMenuList>
@@ -139,14 +141,24 @@ const rightNavItems: NavItem[] = [
 
                 <div class="ml-auto flex items-center space-x-2">
                     <div class="relative flex items-center space-x-1">
-                        <Button as-child>
-                            <Link
-                                :href="auth.user ? '/rooms/create' : '/login?redirect=/rooms/create'"
-                                class="text-sm font-medium"
-                            >
-                                 Add
-                            </Link>
-                        </Button>
+                        <TooltipProvider>
+                            <Tooltip>
+                            <TooltipTrigger>
+                                <Button as-child>
+                                    <Link
+                                        :href="auth.user ? '/rooms/create' : '/login?redirect=/rooms/create'"
+                                        class="text-sm font-medium"
+                                    >
+                                    <HousePlus />
+                                         Add
+                                    </Link>
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Add a new room listing</p>
+                            </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
 
                 </div>
 
@@ -175,18 +187,20 @@ const rightNavItems: NavItem[] = [
                     </template>
 
                     <template v-else>
-                        <Link
-                            href="/login"
-                            class="text-sm text-muted-foreground hover:text-foreground hover:underline transition"
-                        >
-                            Log in
-                        </Link>
-                        <Link
-                            href="/register"
-                            class="text-sm text-muted-foreground hover:text-foreground hover:underline transition ml-4"
-                        >
-                            Register
-                        </Link>
+                        <div class="flex flex-col items-center">
+                            <Link
+                                href="/login"
+                                class="text-sm text-muted-foreground hover:text-foreground hover:underline transition"
+                            >
+                                Log in
+                            </Link>
+                            <Link
+                                href="/register"
+                                class="text-sm text-muted-foreground hover:text-foreground hover:underline transition ml-4"
+                            >
+                                Register
+                            </Link>
+                        </div>
                     </template>
                 </div>
             </div>

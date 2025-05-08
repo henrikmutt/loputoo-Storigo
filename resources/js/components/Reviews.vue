@@ -9,6 +9,7 @@ import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel'
 import CardDescription from './ui/card/CardDescription.vue'
+import { Send, Star } from 'lucide-vue-next'
 
 const emit = defineEmits(['refresh'])
 
@@ -46,10 +47,11 @@ function submit() {
 </script>
 
 <template>
-  <div class="mt-8">
+  <div class="mt-8 bg-muted p-4 rounded-t-xl">
     <div class="flex justify-between items-center mb-4">
       <CardHeader class="text-xl font-semibold">Reviews</CardHeader>
-      <Button @click="showForm = !showForm" variant="outline">
+      <Button @click="showForm = !showForm">
+        <Star />
         {{ showForm ? 'Cancel' : 'Rate this room' }}
       </Button>
     </div>
@@ -65,22 +67,22 @@ function submit() {
         <Textarea id="comment" v-model="form.comment" rows="3" placeholder="Write your review..." />
       </div>
 
-      <Button @click="submit" :disabled="form.processing">Submit</Button>
+      <Button @click="submit" :disabled="form.processing"><Send /> Submit</Button>
     </div>
 
     <div v-if="localReviews.length">
       <Carousel>
-        <CarouselContent class="-ml-2 md:-ml-4 gap-4">
+        <CarouselContent class="gap-4">
           <CarouselItem
             v-for="review in localReviews"
             :key="review.id"
-            class="py-4 md:pl-4 basis-1/2 md:basis-1/3 border rounded-xl shadow-sm"
+            class="py-4 md:pl-4 basis-1/2 md:basis-1/3 border border-black rounded-xl shadow-sm"
           >
-            <Card>
+            <Card class="border-none">
               <CardHeader class="p-1">{{ review.from_user?.name ?? 'Unknown' }}</CardHeader>
               <CardContent class="flex p-1">
                 <p class="text-yellow-600 font-semibold">{{ review.rating }}/5</p>
-                <CardDescription>{{ review.comment }}</CardDescription>
+                <CardDescription class="text-black">{{ review.comment }}</CardDescription>
                 <CardDescription class="text-xs">{{ new Date(review.created_at).toLocaleDateString() }}</CardDescription>
               </CardContent>
             </Card>

@@ -13,6 +13,10 @@ import CardContent from '@/components/ui/card/CardContent.vue';
 import TotalEarnings from '@/components/TotalEarnings.vue';
 import TotalSpendings from '@/components/TotalSpendings.vue';
 import EditRoom from '@/components/EditRoom.vue'
+import TooltipProvider from '@/components/ui/tooltip/TooltipProvider.vue';
+import Tooltip from '@/components/ui/tooltip/Tooltip.vue';
+import TooltipTrigger from '@/components/ui/tooltip/TooltipTrigger.vue';
+import TooltipContent from '@/components/ui/tooltip/TooltipContent.vue';
 
 const props = defineProps<{
   ownerBookings: any[],

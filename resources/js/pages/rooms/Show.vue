@@ -8,6 +8,7 @@ import { Head, useForm } from '@inertiajs/vue3'
 import { ref } from 'vue'
 import Button from '@/components/ui/button/Button.vue'
 import { router } from '@inertiajs/vue3'
+import { ShoppingBag } from 'lucide-vue-next'
 
 const props = defineProps<{ room: any, reviews: any[], hideRentButton?: boolean }>()
 const room = props.room
@@ -48,7 +49,8 @@ const form = useForm({
       <ShowDetails :room="room" />
       <form @submit.prevent="form.post('/bookings')">
         <Button v-if="!props.hideRentButton" type="submit" :disabled="form.processing">
-          Rent the room
+          <ShoppingBag />
+          Rent this room
         </Button>
       </form>
     </div>

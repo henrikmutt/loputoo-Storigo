@@ -16,6 +16,11 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
 } from '../components/ui/alert-dialog';
+import TooltipProvider from './ui/tooltip/TooltipProvider.vue';
+import Tooltip from './ui/tooltip/Tooltip.vue';
+import TooltipTrigger from './ui/tooltip/TooltipTrigger.vue';
+import TabsTrigger from './ui/tabs/TabsTrigger.vue';
+import TooltipContent from './ui/tooltip/TooltipContent.vue';
 
 const props = defineProps<{
   rooms: {
@@ -72,70 +77,79 @@ function handleConfirmDelete() {
 </script>
 
 <template>
-  <Table>
-    <TableCaption>Your Listings</TableCaption>
-    <TableHeader>
-      <TableRow>
-        <TableHead>Location</TableHead>
-        <TableHead>Price</TableHead>
-        <TableHead>Status</TableHead>
-        <TableHead class="text-right">Actions</TableHead>
-      </TableRow>
-    </TableHeader>
-    <TableBody>
-      <TableRow
-        v-for="room in rooms"
-        :key="room.id"
-        >
-  <TableCell>
-    <Link :href="route('rooms.show', room.id)" :data="{ hideRentButton: true }" class="underline">
-      {{ room.location }}
-    </Link>
-  </TableCell>
-  <TableCell>
-    {{ room.price_per_day ? `${room.price_per_day} €/day` : '' }}
-    <br v-if="room.price_per_day && room.price_per_month" />
-    {{ room.price_per_month }} €/month
-  </TableCell>
-  <TableCell>
-  <Badge :class="room.is_available ? 'bg-green-600' : 'bg-red-600'">
-    {{ room.is_available ? 'Available' : 'Unavailable' }}
-  </Badge>
-</TableCell>
-
-  <TableCell class="text-right">
-    <DropdownMenu>
-      <DropdownMenuTrigger as-child>
-        <Button variant="outline" size="sm"><Ellipsis /></Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem @click="$emit('edit-room', room)">
-          <Pencil /> Edit
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          v-if="room.is_available"
-          @click="makeUnavailable(room.id)"
-        >
-          <X /> Unavailable
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          v-else
-          @click="makeAvailable(room.id)"
-        >
-          <Check /> Available
-        </DropdownMenuItem>
-        <DropdownMenuItem class="text-red-600" @click="confirmDeleteRoom(room.id)">
-          <Trash2 /> Delete
-        </DropdownMenuItem>
-
-      </DropdownMenuContent>
-    </DropdownMenu>
-  </TableCell>
-</TableRow>
-
-    </TableBody>
-  </Table>
-
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger class="w-full">
+      
+      <Table>
+        <TableCaption>Your Listings</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Location</TableHead>
+            <TableHead>Price</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead class="text-right">Actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow
+            v-for="room in rooms"
+            :key="room.id"
+            >
+      <TableCell>
+        <Link :href="route('rooms.show', room.id)" :data="{ hideRentButton: true }" class="underline">
+          {{ room.location }}
+        </Link>
+      </TableCell>
+      <TableCell>
+        {{ room.price_per_day ? `${room.price_per_day} €/day` : '' }}
+        <br v-if="room.price_per_day && room.price_per_month" />
+        {{ room.price_per_month }} €/month
+      </TableCell>
+      <TableCell>
+      <Badge :class="room.is_available ? 'bg-green-600' : 'bg-red-600'">
+        {{ room.is_available ? 'Available' : 'Unavailable' }}
+      </Badge>
+    </TableCell>
+    
+      <TableCell class="text-right">
+        <DropdownMenu>
+          <DropdownMenuTrigger as-child>
+            <Button variant="outline" size="sm"><Ellipsis /></Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem @click="$emit('edit-room', room)">
+              <Pencil /> Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              v-if="room.is_available"
+              @click="makeUnavailable(room.id)"
+            >
+              <X /> Unavailable
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              v-else
+              @click="makeAvailable(room.id)"
+            >
+              <Check /> Available
+            </DropdownMenuItem>
+            <DropdownMenuItem class="text-red-600" @click="confirmDeleteRoom(room.id)">
+              <Trash2 /> Delete
+            </DropdownMenuItem>
+    
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </TableCell>
+    </TableRow>
+    
+        </TableBody>
+      </Table>
+  </TooltipTrigger>
+      <TooltipContent TooltipContent>
+        <p>This table displays all your listed storage spaces.</p>
+      </TooltipContent>
+    </Tooltip>
+</TooltipProvider>
   <AlertDialog :open="roomToDelete !== null" @update:open="(val: boolean) => { if (!val) roomToDelete = null }">
   <AlertDialogContent>
     <AlertDialogHeader>
