@@ -9,7 +9,7 @@ import { ref } from 'vue'
 import Button from '@/components/ui/button/Button.vue'
 import { router } from '@inertiajs/vue3'
 
-const props = defineProps<{ room: any, reviews: any[] }>()
+const props = defineProps<{ room: any, reviews: any[], hideRentButton?: boolean }>()
 const room = props.room
 
 const showCarousel = ref(false)
@@ -47,7 +47,7 @@ const form = useForm({
     <div class="flex flex-col gap-8">
       <ShowDetails :room="room" />
       <form @submit.prevent="form.post('/bookings')">
-        <Button type="submit" :disabled="form.processing">
+        <Button v-if="!props.hideRentButton" type="submit" :disabled="form.processing">
           Rent the room
         </Button>
       </form>

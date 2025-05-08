@@ -20,7 +20,7 @@ class RoomController extends Controller
         return response()->json($rooms);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $room = Room::findOrFail($id);
 
@@ -32,7 +32,8 @@ class RoomController extends Controller
 
         return inertia('rooms/Show', [
             'room' => $room,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'hideRentButton' => $request->input('hideRentButton', false)
         ]);
     }
 
@@ -93,14 +94,15 @@ class RoomController extends Controller
         return back()->with('success', 'Room marked as available.');
     }
 
-    public function destroy($id): RedirectResponse
+    public function softDelete($id)
     {
         $room = Room::where('user_id', auth()->id())->findOrFail($id);
         $room->is_deleted = true;
         $room->save();
 
-        return back()->with('success', 'Room deleted successfully.');
+        return back()->with('success', 'Room deleted.');
     }
+
 
     public function update(Request $request, $id)
     {

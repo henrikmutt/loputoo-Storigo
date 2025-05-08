@@ -22,12 +22,15 @@ import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 interface Props {
-    breadcrumbs?: BreadcrumbItem[];
+  breadcrumbs?: BreadcrumbItem[];
+  hasWaitingActions?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    breadcrumbs: () => [],
+  breadcrumbs: () => [],
+  hasWaitingActions: false
 });
+
 
 const page = usePage();
 const auth = computed(() => page.props.auth);
@@ -117,19 +120,19 @@ const rightNavItems: NavItem[] = [
                     <NavigationMenu class="ml-10 flex h-full items-stretch">
                         <NavigationMenuList class="flex h-full items-stretch space-x-2">
                             <NavigationMenuItem v-for="(item, index) in mainNavItems" :key="index" class="relative flex h-full items-center">
-                                <Link :href="item.href">
+                                <Link :href="item.href" class="relative">
                                     <NavigationMenuLink
-                                        :class="[navigationMenuTriggerStyle(), activeItemStyles(item.href), 'h-9 cursor-pointer px-3']"
+                                    :class="[navigationMenuTriggerStyle(), activeItemStyles(item.href), 'h-9 cursor-pointer px-3']"
                                     >
-                                        <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
-                                        {{ item.title }}
+                                    <component v-if="item.icon" :is="item.icon" class="mr-2 h-4 w-4" />
+                                    {{ item.title }}
+                                    <span
+                                        v-if="item.href === '/dashboard' && props.hasWaitingActions"
+                                        class="absolute top-0 right-0 mt-1 ml-1 size-2 rounded-full bg-red-500"
+                                    ></span>
                                     </NavigationMenuLink>
                                 </Link>
-                                <div
-                                    v-if="isCurrentRoute(item.href)"
-                                    class="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"
-                                ></div>
-                            </NavigationMenuItem>
+                                </NavigationMenuItem>
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>

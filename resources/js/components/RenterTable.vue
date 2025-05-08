@@ -9,6 +9,7 @@ import {
 import Button from './ui/button/Button.vue'
 import { Check, CircleX, Ellipsis, MessageSquareText, OctagonPause, ShoppingCart } from 'lucide-vue-next'
 import { Badge } from '../components/ui/badge'
+import { Link } from '@inertiajs/vue3'
 
 const props = defineProps<{
   bookings: any[]
@@ -53,7 +54,11 @@ function confirmRenterStop(id: number) {
     </TableHeader>
     <TableBody>
       <TableRow v-for="booking in bookings" :key="booking.id">
-        <TableCell>{{ booking.room?.location }}</TableCell>
+        <TableCell>
+          <Link :href="route('rooms.show', booking.room.id)" :data="{ hideRentButton: true }" class="underline">
+            {{ booking.room?.location }}
+          </Link>
+        </TableCell>
         <TableCell class="hidden md:block">{{ new Date(booking.created_at).toLocaleDateString() }}</TableCell>
         <TableCell>{{ booking.total_price }} €</TableCell>
 

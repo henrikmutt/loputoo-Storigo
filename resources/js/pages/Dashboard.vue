@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/vue3';
 import DashTabs from '../components/DashTabs.vue'
 import ChatBox from '../components/ChatBox.vue'
 import UserRooms from '../components/UserRooms.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import axios from 'axios'
 import Card from '@/components/ui/card/Card.vue';
 import CardTitle from '@/components/ui/card/CardHeader.vue';
@@ -62,6 +62,7 @@ function openEditRoom(room: any) {
   selectedRoom.value = room
   isEditDialogOpen.value = true
 }
+
 </script>
 
 <template>

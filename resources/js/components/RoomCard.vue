@@ -32,10 +32,16 @@ defineProps<{ room: any }>()
 
     <CardContent class="p-4">
       <div class="flex justify-between items-center">
-        <CardTitle>{{ room.size }} m³</CardTitle>
-        <p><strong>{{ room.price_per_month }} €</strong> / Month</p>
+        <CardTitle>{{ room.location }}</CardTitle>
       </div>
-      <CardDescription>{{ room.location }}</CardDescription>
+      <div v-if="room.width && room.length && room.height" class="flex gap-2">
+        <CardDescription><span class="text-black font-bold">W:</span> {{ room.width }} m</CardDescription>
+        /
+        <CardDescription><span class="text-black font-bold">L:</span> {{ room.length }} m</CardDescription>
+        /
+        <CardDescription><span class="text-black font-bold">H:</span> {{ room.height }} m</CardDescription>
+      </div>
+      <p><strong>{{ room.price_per_month }} €</strong> / Month</p>
     </CardContent>
   </Card>
 </template>

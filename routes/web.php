@@ -18,8 +18,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/rooms', [RoomController::class, 'store'])->name('rooms.store');
     Route::patch('/rooms/{id}/unavailable', [RoomController::class, 'makeUnavailable'])->name('rooms.unavailable');
     Route::patch('/rooms/{id}/available', [RoomController::class, 'makeAvailable'])->name('rooms.available');
-    Route::delete('/rooms/{id}', [RoomController::class, 'destroy'])->name('rooms.destroy');
     Route::post('/rooms/{id}', [RoomController::class, 'update'])->name('rooms.update');
+    Route::patch('/rooms/{id}/delete', [RoomController::class, 'softDelete'])->name('rooms.delete');
 
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
 
