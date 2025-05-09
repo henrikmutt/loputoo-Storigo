@@ -19,7 +19,7 @@ const mainNavItems: NavItem[] = [
 
     {
         title: 'Add new listing',
-        href: 'rooms/create',
+        href: '/rooms/create',
         icon: HousePlus,
     },
 

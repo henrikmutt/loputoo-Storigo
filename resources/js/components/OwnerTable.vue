@@ -81,7 +81,7 @@ function confirmOwnerStop(id: number) {
             </template>
 
             <template v-else-if="booking.status === 'stopped'">
-              <Badge>Stopped</Badge>
+              <Badge class="bg-black">Stopped</Badge>
             </template>
 
             <template v-else>

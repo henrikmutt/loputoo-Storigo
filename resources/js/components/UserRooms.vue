@@ -77,9 +77,10 @@ function handleConfirmDelete() {
 </script>
 
 <template>
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger class="w-full">
+      <TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger>
+
       
       <Table>
         <TableCaption>Your Listings</TableCaption>
@@ -96,17 +97,17 @@ function handleConfirmDelete() {
             v-for="room in rooms"
             :key="room.id"
             >
-      <TableCell>
+      <TableCell class="text-left">
         <Link :href="route('rooms.show', room.id)" :data="{ hideRentButton: true }" class="underline">
           {{ room.location }}
         </Link>
       </TableCell>
-      <TableCell>
+      <TableCell class="text-left">
         {{ room.price_per_day ? `${room.price_per_day} €/day` : '' }}
         <br v-if="room.price_per_day && room.price_per_month" />
         {{ room.price_per_month }} €/month
       </TableCell>
-      <TableCell>
+      <TableCell class="text-left">
       <Badge :class="room.is_available ? 'bg-green-600' : 'bg-red-600'">
         {{ room.is_available ? 'Available' : 'Unavailable' }}
       </Badge>
@@ -144,12 +145,12 @@ function handleConfirmDelete() {
     
         </TableBody>
       </Table>
-  </TooltipTrigger>
-      <TooltipContent TooltipContent>
-        <p>This table displays all your listed storage spaces.</p>
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>These are all your storage room listings.</p>
       </TooltipContent>
     </Tooltip>
-</TooltipProvider>
+  </TooltipProvider>
   <AlertDialog :open="roomToDelete !== null" @update:open="(val: boolean) => { if (!val) roomToDelete = null }">
   <AlertDialogContent>
     <AlertDialogHeader>
