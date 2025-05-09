@@ -2,13 +2,13 @@
 import AppHeader from '@/components/AppHeader.vue'
 import ShowImages from '@/components/ShowImages.vue'
 import ShowDetails from '@/components/ShowDetails.vue'
-import FullscreenCarousel from '@/components/FullscreenCarousel.vue'
 import Reviews from '@/components/Reviews.vue'
 import { Head, useForm } from '@inertiajs/vue3'
 import { ref } from 'vue'
 import Button from '@/components/ui/button/Button.vue'
 import { router } from '@inertiajs/vue3'
 import { ShoppingBag } from 'lucide-vue-next'
+import FullscreenCarousel from '@/components/fullscreenCarousel.vue'
 
 const props = defineProps<{ room: any, reviews: any[], hideRentButton?: boolean }>()
 const room = props.room
