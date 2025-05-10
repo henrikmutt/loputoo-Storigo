@@ -18,7 +18,7 @@ defineProps<{ room: any }>()
         <CarouselContent>
           <CarouselItem v-for="(imageUrl, index) in room.images" :key="index" class="aspect-square">
             <img
-              :src="imageUrl"
+              :src="`/storage/${imageUrl}`"
               :alt="`Room image ${index + 1}`"
               class="w-full h-full object-cover rounded-xl"
             />
