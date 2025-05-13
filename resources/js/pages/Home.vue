@@ -17,7 +17,7 @@ function handleFilter(type: FilterType | null) {
   const filters = {
     bike: (r: any) => r.size <= 2,
     car: (r: any) => r.size > 2 && r.size <= 8,
-    boat: (r: any) => r.size > 8 && r.size <= 15,
+    boat: (r: any) => r.size > 8 && r.size <= 20,
     boxes: (r: any) => r.size <= 10,
   }
 

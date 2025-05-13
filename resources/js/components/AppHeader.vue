@@ -18,7 +18,7 @@ import UserMenuContent from '@/components/UserMenuContent.vue';
 import { getInitials } from '@/composables/useInitials';
 import type { BreadcrumbItem, NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { BookOpen, Folder, HousePlus, LayoutGrid, Menu, Search } from 'lucide-vue-next';
+import { BookOpen, CircleUserRound, Folder, HousePlus, LayoutGrid, Menu, Search } from 'lucide-vue-next';
 import { computed } from 'vue';
 
 
@@ -187,18 +187,17 @@ const mainNavItems: NavItem[] = [
                     </template>
 
                     <template v-else>
-                        <div class="flex flex-col items-center">
+                        <div class="hidden md:block">
                             <Link
                                 href="/login"
                                 class="text-sm text-muted-foreground hover:text-foreground hover:underline transition"
                             >
                                 Log in
                             </Link>
-                            <Link
-                                href="/register"
-                                class="text-sm text-muted-foreground hover:text-foreground hover:underline transition ml-4"
-                            >
-                                Register
+                        </div>
+                        <div class="md:hidden">
+                            <Link href="/login" title="log in">
+                                <CircleUserRound />
                             </Link>
                         </div>
                     </template>
