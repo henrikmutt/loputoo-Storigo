@@ -18,7 +18,7 @@ defineProps<{
     <Tooltip>
       <TooltipTrigger class="w-full h-full gap-4 rounded-xl border dark:bg-gray-900 p-4 md:p-6 shadow-md">
         <Card class="flex flex-col gap-4 md:gap-6">
-            <CardTitle class="text-xl font-normal p-0">Total earnings</CardTitle>
+            <CardTitle class="text-xl font-normal p-0">Earnings</CardTitle>
             <CardContent class="text-2xl md:text-4xl font-bold text-green-600">
                 € {{ total.toFixed(2) }}
             </CardContent>

@@ -13,5 +13,5 @@ defineProps<Props>();
 </script>
 
 <template>
-    <img src="/storage/images/Storigo_noBG.png" alt="Storigo logo" class="size-8 aspect-square">
+    <img src="/images/Storigo_noBG.png" alt="Storigo logo" class="size-8 aspect-square">
 </template>
