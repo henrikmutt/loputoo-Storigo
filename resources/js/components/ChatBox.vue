@@ -52,7 +52,7 @@ const chatPartnerName = computed(() => {
 
 <template>
   <div class="fixed bottom-0 w-full lg:right-8 lg:w-80 z-50">
-    <Card class="shadow-2xl">
+    <Card class="shadow-2xl border border-black">
       <CardHeader class="bg-gray-100 justify-between rounded-t-md px-4 py-2">
         Chat with {{ chatPartnerName }}
         <button @click="$emit('close')"><X /></button>

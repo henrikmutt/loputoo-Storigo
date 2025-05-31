@@ -13,12 +13,12 @@ const emit = defineEmits(['close'])
 
 <template>
   <div class="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center">
+    <Button variant="secondary" class="absolute right-4 top-10 lg:right-10 z-50"
+        @click="emit('close')">
+      <X />
+    </Button>
     <div class="relative w-full max-w-4xl">
 
-      <Button variant="secondary" class="absolute right-4 z-50"
-          @click="emit('close')">
-        <X />
-      </Button>
 
       <Carousel class="w-full">
         <CarouselContent>

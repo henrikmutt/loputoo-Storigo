@@ -30,8 +30,8 @@ const props = defineProps<{
 
       <p class="text-muted-foreground">{{ room.description }}</p>
       <div class="flex gap-4 pt-6 text-sm">
-        <p v-if="room.price_per_day">{{ room.price_per_day }}€ / Päev</p>
-        <CardTitle v-if="room.price_per_month">{{ room.price_per_month }} € / Kuu</CardTitle>
+        <p v-if="room.price_per_day">{{ room.price_per_day }}€ / Day</p>
+        <CardTitle v-if="room.price_per_month">{{ room.price_per_month }} € / Month</CardTitle>
       </div>
     </div>
     
