@@ -72,7 +72,7 @@ function submit() {
 
     <div v-if="localReviews.length">
       <Carousel>
-        <CarouselContent class="gap-4">
+        <CarouselContent class="gap-4 ml-4">
           <CarouselItem
             v-for="review in localReviews"
             :key="review.id"
